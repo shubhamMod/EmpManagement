@@ -17,7 +17,7 @@ export default function EditEmployee({ user }) {
   const [submitting, setSubmitting] = useState(false);
 
   const adminId = user?.adminId;
-  console.log("AdminId:", adminId);
+  // console.log("AdminId:", adminId);
 
   useEffect(() => {
     if (!adminId) {

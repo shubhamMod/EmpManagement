@@ -25,12 +25,13 @@ export default function Login({ setUser }) {
 
       if (resp.ok) {
         const data = await resp.json();
-         localStorage.removeItem("id");
-        // localStorage.removeItem("token");
-        // localStorage.setItem("id", data.id); // store admin ID only
-       setUser({ adminId: data.id, email,name:data.firstname, token: data.token });
-      //  console.log(data.firstnameme);
-       
+        localStorage.removeItem("id");
+        setUser({ 
+          adminId: data.id, 
+          email, 
+          name: data.firstname, 
+          token: data.token 
+        });
         navigate("/home");
       } else if (resp.status === 401) {
         setError("Invalid credentials — please try again.");
@@ -48,9 +49,7 @@ export default function Login({ setUser }) {
 
   return (
     <div className="login-bg d-flex justify-content-center align-items-center vh-100">
-    
       <div className="card login-card shadow p-4">
-        
         <h3 className="text-center mb-4">Modus Login Admin</h3>
 
         {error && <div className="alert alert-danger">{error}</div>}
@@ -82,15 +81,31 @@ export default function Login({ setUser }) {
             />
           </div>
 
-          <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+          <button 
+            type="submit" 
+            className="btn btn-primary w-100" 
+            disabled={loading}
+          >
             {loading ? "Signing in..." : "Sign in"}
           </button>
+
           <div className="text-center mt-3">
             <small>
               Don't have an account? <a href="/register">Register</a>
             </small>
           </div>
 
+          <div className="text-center mt-2">
+            <small>
+              <button 
+                type="button" 
+                className="btn btn-link p-0" 
+                onClick={() => navigate("/forgot-password")}
+              >
+                Forgot Password?
+              </button>
+            </small>
+          </div>
         </form>
       </div>
     </div>
